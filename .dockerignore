@@ -1,0 +1,8 @@
+*.iso
+.git
+.gitignore
+README.md
+output/
+work/
+mount/
+*.log
