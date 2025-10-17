@@ -1,4 +1,4 @@
-.PHONY: build run clean help
+.PHONY: build run clean help validate
 
 # Variables
 IMAGE_NAME=debian-trixie-installer
@@ -11,18 +11,23 @@ help:
 	@echo "  build       - Build the Docker image"
 	@echo "  run         - Build the custom Debian ISO"
 	@echo "  compose     - Build using docker-compose"
+	@echo "  validate    - Validate preseed configuration"
 	@echo "  clean       - Remove generated files and output"
 	@echo "  clean-all   - Remove everything including Docker images"
 	@echo "  help        - Show this help message"
 	@echo ""
 	@echo "Example usage:"
-	@echo "  make build && make run"
+	@echo "  make validate && make build && make run"
+
+validate:
+	@echo "Validating preseed configuration..."
+	@./validate-preseed.sh
 
 build:
 	@echo "Building Docker image..."
 	docker build -t $(IMAGE_NAME) .
 
-run: build
+run: validate build
 	@echo "Creating output directory..."
 	@mkdir -p $(OUTPUT_DIR)
 	@echo "Building Debian Trixie unattended installer ISO..."
