@@ -32,7 +32,7 @@ run: validate build
 	@mkdir -p $(OUTPUT_DIR)
 	@echo "Building Debian Trixie unattended installer ISO..."
 	docker run --rm --privileged \
-		-v $(PWD)/output:/output \
+		-v "$(CURDIR)/output:/output" \
 		$(IMAGE_NAME)
 	@echo ""
 	@echo "ISO created successfully in $(OUTPUT_DIR)/"
