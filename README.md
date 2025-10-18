@@ -48,7 +48,7 @@ You can now use the generated ISO to:
 - Boot in a virtual machine (VirtualBox, VMware, QEMU, etc.)
 - Deploy on physical hardware
 
-The installation will start automatically after 10 seconds.
+The installation will start automatically after 1 second.
 
 ## Default Credentials
 

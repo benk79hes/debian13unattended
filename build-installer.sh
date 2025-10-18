@@ -46,16 +46,26 @@ if [ -d "/build/additional-scripts" ] && [ "$(ls -A /build/additional-scripts)" 
 fi
 
 echo "Modifying isolinux configuration for auto-install..."
+
+# Create custom menu entry for automated install
 cat > "$WORK_DIR/isolinux/txt.cfg" << 'EOF'
 default auto
 label auto
     menu label ^Automated Install
+    menu default
     kernel /install.amd/vmlinuz
     append auto=true priority=critical vga=788 initrd=/install.amd/initrd.gz preseed/file=/cdrom/preseed.cfg --- quiet
 EOF
 
-# Update isolinux.cfg timeout
-sed -i 's/timeout 0/timeout 10/' "$WORK_DIR/isolinux/isolinux.cfg" || true
+# Update main isolinux.cfg to set default and timeout
+# Set timeout to 1 second (10 deciseconds) for automatic boot
+sed -i 's/timeout 0/timeout 10/' "$WORK_DIR/isolinux/isolinux.cfg"
+# Set the default to auto if not already set
+if ! grep -q "^default " "$WORK_DIR/isolinux/isolinux.cfg"; then
+    sed -i '1i default auto' "$WORK_DIR/isolinux/isolinux.cfg"
+else
+    sed -i 's/^default .*/default auto/' "$WORK_DIR/isolinux/isolinux.cfg"
+fi
 
 echo "Fixing MD5 checksums..."
 cd "$WORK_DIR"

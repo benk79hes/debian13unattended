@@ -69,7 +69,7 @@ User:  debian / debian
    ```
 
 2. **Boot from USB/VM**:
-   - The installation starts automatically after 10 seconds
+   - The installation starts automatically after 1 second
    - No user interaction required
    - Installation takes 10-20 minutes
 
