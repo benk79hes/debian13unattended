@@ -1,0 +1,23 @@
+# Output directory for generated ISOs
+output/
+
+# Working directories
+work/
+mount/
+
+# ISO files
+*.iso
+
+# Log files
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/

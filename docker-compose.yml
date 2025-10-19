@@ -1,0 +1,7 @@
+services:
+  installer-builder:
+    build: .
+    privileged: true
+    volumes:
+      - ./output:/output
+    container_name: debian-trixie-installer-builder
